@@ -12,7 +12,7 @@ matplotlib.rcParams['font.family'] = 'SimHei'  # 使用黑体
 matplotlib.rcParams['axes.unicode_minus'] = False  # 处理负号显示问题
 
 # 读取 Excel 文件
-file_path = 'Gen9_5000.xlsx'
+file_path = 'games_studied.xlsx'
 df = pd.read_excel(file_path, sheet_name='All')
 
 # 将相关列转换为数值型，如果无法转换则设置为 NaN

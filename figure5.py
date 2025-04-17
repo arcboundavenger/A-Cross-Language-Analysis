@@ -6,7 +6,7 @@ import seaborn as sns
 from sklearn.preprocessing import MinMaxScaler
 
 # 读取xlsx文件
-file_path = 'pvalue_results_2.xlsx'  # 替换为你的文件路径
+file_path = 'colored_map.xlsx'  # 替换为你的文件路径
 data = pd.read_excel(file_path, sheet_name='Sheet2')
 
 # Create a DataFrame

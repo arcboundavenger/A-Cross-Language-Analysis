@@ -3,7 +3,7 @@ import numpy as np
 from scipy import stats
 
 # 读取数据
-file_path = 'ztestpvalue.xlsx'  # 替换为你的文件路径
+file_path = 'games_studied_regional_score.xlsx'  # 替换为你的文件路径
 data = pd.read_excel(file_path, sheet_name='Sheet1')
 
 # 提取全球平均值行
@@ -57,6 +57,6 @@ for index, row in data.iterrows():
 print(results)
 
 # 保存结果为Excel文件
-output_file_path = 'zvalue_results.xlsx'
+output_file_path = 'Table 3.xlsx'
 results.to_excel(output_file_path, index=False)
 print(f"结果已保存到 {output_file_path}")

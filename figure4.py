@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
 # 从指定的 Excel 文件和工作表中读取数据
-file_path = 'Gen9_5000.xlsx'  # 替换为您的文件路径
+file_path = 'games_studied.xlsx'  # 替换为您的文件路径
 df = pd.read_excel(file_path, sheet_name='All')
 
 # 将 releaseDate 转换为日期格式

@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # 读取 Excel 文件
-file_path = 'Gen9_5000.xlsx'  # 替换为您的文件路径
+file_path = 'games_studied.xlsx'  # 替换为您的文件路径
 df = pd.read_excel(file_path, sheet_name='All')
 
 # 筛选 EA? 列为 1 和 0 的数据

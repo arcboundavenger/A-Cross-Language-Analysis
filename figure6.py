@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # 读取Excel文件，指定工作表名称为 'All'
-file_path = 'Gen9_5000.xlsx'  # 请将此处替换为您的文件名
+file_path = 'games_studied.xlsx'  # 请将此处替换为您的文件名
 df = pd.read_excel(file_path, sheet_name='All')
 
 # 将价格和评分列转换为数值类型
