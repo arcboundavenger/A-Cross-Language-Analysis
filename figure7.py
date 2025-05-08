@@ -63,7 +63,7 @@ plt.show()
 output_file = 'clustered_results.xlsx'
 with pd.ExcelWriter(output_file) as writer:
     for cluster_id in range(optimal_k):
-        cluster_data = df[df['cluster'] == cluster_id][['steamId', 'name', 'ScoreGap', 'price', 'reviewScore', 'medianPlaytime']]
+        cluster_data = df[df['cluster'] == cluster_id][['steamId', 'name', 'ScoreGap', 'price', 'reviewScore']]
         cluster_data.to_excel(writer, sheet_name=f'Cluster_{cluster_id}', index=False)
 
 print(f"输出成功，文件名为：{output_file}")
