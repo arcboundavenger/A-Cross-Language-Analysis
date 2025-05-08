@@ -25,13 +25,22 @@ labels_score = ['[0, 10)', '[10, 20)', '[20, 30)', '[30, 40)', '[40, 50)',
                 '[50, 60)', '[60, 70)', '[70, 80)', '[80, 90)', '[90, 100)']
 df['reviewScore_group'] = pd.cut(df['reviewScore'], bins=bins_score, labels=labels_score, right=False)
 
+# 绘制左图箱线图
 df.boxplot(column='ScoreGap', by='reviewScore_group', ax=axs[0])
+# 计算并标注平均值
+means_score = df.groupby('reviewScore_group')['ScoreGap'].mean()
+for i, mean in enumerate(means_score):
+    axs[0].scatter([i + 1], [mean], color='red', zorder=5)
 axs[0].set_xlabel('Review Score Group', fontsize=12)
 axs[0].set_ylabel('Score Gap', fontsize=12)
 axs[0].tick_params(axis='x', rotation=45)
 
 # 右图：ScoreGap按Price分组
 df.boxplot(column='ScoreGap', by='price_group', ax=axs[1])
+# 计算并标注平均值
+means_price = df.groupby('price_group')['ScoreGap'].mean()
+for i, mean in enumerate(means_price):
+    axs[1].scatter([i + 1], [mean], color='red', zorder=5)
 axs[1].set_xlabel('Price Group', fontsize=12)
 axs[1].set_ylabel('Score Gap', fontsize=12)
 axs[1].tick_params(axis='x', rotation=45)
