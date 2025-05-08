@@ -110,12 +110,13 @@ def export_to_excel(valid_df, output_path="analysis_results.xlsx"):
                 worksheet.column_dimensions[col].width = 18
             worksheet['A1'] = f"{sheet_name} Statistical Analysis"
 
+
 def visualize(pos_data, neg_data):
     emotions = pos_data.index.tolist()
     x = np.arange(len(emotions))
     bar_width = 0.35
 
-    plt.figure(figsize=(20, 8))
+    fig = plt.figure(figsize=(20, 8))
 
     # 第一个子图（正面评价）
     ax1 = plt.subplot(1, 2, 1)
@@ -147,7 +148,11 @@ def visualize(pos_data, neg_data):
     plt.legend(loc='upper left', bbox_to_anchor=(0, 1))
 
     plt.tight_layout()
+
+    # 保存图像为figure8.png（DPI=600）
+    fig.savefig('figure8.png', dpi=600, bbox_inches='tight')
     plt.show()
+
 
 if __name__ == "__main__":
     df = load_data("emotion_scores.xlsx")

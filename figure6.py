@@ -53,5 +53,8 @@ plt.legend()
 # 调整布局
 plt.tight_layout()
 
+# 保存图片为figure6.png（600 DPI）
+plt.savefig('figure6.png', dpi=600, bbox_inches='tight')
+
 # 显示图形
 plt.show()

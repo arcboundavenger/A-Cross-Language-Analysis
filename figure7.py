@@ -15,7 +15,7 @@ matplotlib.rcParams['axes.unicode_minus'] = False  # 处理负号显示问题
 file_path = 'games_studied.xlsx'
 df = pd.read_excel(file_path, sheet_name='All')
 
-# 将相关列转换为数值型，如果无法转换则设置为 NaN
+# 将相关列转换为数值型
 df['ScoreGap'] = pd.to_numeric(df['ScoreGap'], errors='coerce')
 df['price'] = pd.to_numeric(df['price'], errors='coerce')
 df['reviewScore'] = pd.to_numeric(df['reviewScore'], errors='coerce')
@@ -40,23 +40,37 @@ df['cluster'] = kmeans.fit_predict(X_scaled)
 fig = plt.figure(figsize=(12, 8))
 ax = fig.add_subplot(111, projection='3d')
 
-# 使用 scatter 方法绘制 3D 散点图
-scatter = ax.scatter(df['ScoreGap'], df['price'], df['reviewScore'], c=df['cluster'], cmap='viridis', alpha=0.6)
+# 绘制3D散点图
+scatter = ax.scatter(
+    df['ScoreGap'],
+    df['price'],
+    df['reviewScore'],
+    c=df['cluster'],
+    cmap='viridis',
+    alpha=0.6,
+    s=50  # 点的大小
+)
 
-# 设置标题和坐标轴标签
-ax.set_xlabel('Score Gap')
-ax.set_ylabel('Price')
-ax.set_zlabel('Review Score')
+# 设置坐标轴标签
+ax.set_xlabel('Score Gap', labelpad=10)
+ax.set_ylabel('Price', labelpad=10)
+ax.set_zlabel('Review Score', labelpad=10)
 
 # 添加色点图例
 colors = plt.cm.viridis(np.linspace(0, 1, optimal_k))
 labels = [f'Cluster {i}' for i in range(optimal_k)]
-for idx, (color, label) in enumerate(zip(colors, labels)):
-    ax.scatter([], [], [], color=color, label=label, alpha=0.6)
+legend_elements = [plt.Line2D([0], [0], marker='o', color='w',
+                             markerfacecolor=colors[i], markersize=10,
+                             label=labels[i])
+                  for i in range(optimal_k)]
+ax.legend(handles=legend_elements, title="Clusters", loc='upper right')
 
-ax.legend(title="Clusters", loc='upper left')
+# 调整视角（俯仰角30度，方位角45度）
+ax.view_init(elev=30, azim=45)
 
+# 调整布局并保存图像
 plt.tight_layout()
+fig.savefig('figure7.png', dpi=600, bbox_inches='tight', transparent=False)
 plt.show()
 
 # 输出到 Excel
@@ -66,4 +80,5 @@ with pd.ExcelWriter(output_file) as writer:
         cluster_data = df[df['cluster'] == cluster_id][['steamId', 'name', 'ScoreGap', 'price', 'reviewScore']]
         cluster_data.to_excel(writer, sheet_name=f'Cluster_{cluster_id}', index=False)
 
-print(f"输出成功，文件名为：{output_file}")
+print(f"聚类结果已保存至: {output_file}")
+print(f"3D可视化图已保存为: figure7.png (600 DPI)")

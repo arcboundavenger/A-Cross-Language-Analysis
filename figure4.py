@@ -31,6 +31,6 @@ merged_data.plot(column='Ratings', cmap=cmap, linewidth=0.8, edgecolor='0.8', le
 
 # Remove axis ticks and labels
 ax.set_axis_off()
-
+fig.savefig('figure4.png', dpi=600, bbox_inches='tight')
 # Show the plot
 plt.show()
