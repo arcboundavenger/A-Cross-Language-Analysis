@@ -44,7 +44,6 @@ ax = fig.add_subplot(111, projection='3d')
 scatter = ax.scatter(df['ScoreGap'], df['price'], df['reviewScore'], c=df['cluster'], cmap='viridis', alpha=0.6)
 
 # 设置标题和坐标轴标签
-ax.set_title('K-means Clustering Result (3D View)')
 ax.set_xlabel('Score Gap')
 ax.set_ylabel('Price')
 ax.set_zlabel('Review Score')
@@ -61,7 +60,7 @@ plt.tight_layout()
 plt.show()
 
 # 输出到 Excel
-output_file = 'clustered_results_with_medianPlaytime.xlsx'
+output_file = 'clustered_results.xlsx'
 with pd.ExcelWriter(output_file) as writer:
     for cluster_id in range(optimal_k):
         cluster_data = df[df['cluster'] == cluster_id][['steamId', 'name', 'ScoreGap', 'price', 'reviewScore', 'medianPlaytime']]
