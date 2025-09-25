@@ -31,9 +31,12 @@ df.boxplot(column='ScoreGap', by='reviewScore_group', ax=axs[0])
 means_score = df.groupby('reviewScore_group')['ScoreGap'].mean()
 for i, mean in enumerate(means_score):
     axs[0].scatter([i + 1], [mean], color='red', zorder=5)
-axs[0].set_xlabel('Review Score Group', fontsize=12)
-axs[0].set_ylabel('Score Gap', fontsize=12)
+axs[0].set_xlabel('Global Review Score', fontsize=12)
+axs[0].set_ylabel('Score Gap (ENG - CHN)', fontsize=12)
 axs[0].tick_params(axis='x', rotation=45)
+# 添加字母标记 a
+axs[0].text(0.95, 0.95, 'a', transform=axs[0].transAxes, fontsize=14, fontweight='bold',
+            horizontalalignment='right', verticalalignment='top')
 
 # 右图：ScoreGap按Price分组
 df.boxplot(column='ScoreGap', by='price_group', ax=axs[1])
@@ -41,9 +44,12 @@ df.boxplot(column='ScoreGap', by='price_group', ax=axs[1])
 means_price = df.groupby('price_group')['ScoreGap'].mean()
 for i, mean in enumerate(means_price):
     axs[1].scatter([i + 1], [mean], color='red', zorder=5)
-axs[1].set_xlabel('Price Group', fontsize=12)
-axs[1].set_ylabel('Score Gap', fontsize=12)
+axs[1].set_xlabel('Price Interval', fontsize=12)
+axs[1].set_ylabel('Score Gap (ENG - CHN)', fontsize=12)
 axs[1].tick_params(axis='x', rotation=45)
+# 添加字母标记 b - 修正了这里，使用axs[1].transAxes而不是axs[0].transAxes
+axs[1].text(0.95, 0.95, 'b', transform=axs[1].transAxes, fontsize=14, fontweight='bold',
+            horizontalalignment='right', verticalalignment='top')
 
 # 移除所有标题
 for ax in axs:
